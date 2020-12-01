@@ -37,9 +37,11 @@ carrefour ='CA.PA'
 data = yf.Ticker(airbus)
 datac = yf.Ticker(carrefour)
 
-dataDF = data.history(period='1d',start = '2000-12-01',end='2020-11-30')
+dataDFA = data.history(period='1d',start = '2000-12-01',end='2020-11-30')
+dataDFC = datac.history(period='1d',start = '2000-12-01',end='2020-11-30')
 
-dataDF.to_csv(r'C:\Users\Luisa.HERNANDEZ-ZABA\PycharmProjects\tp-machine-learnig\data_airbus.csv', index = False)
+
+dataDFA.to_csv(r'C:\Users\Luisa.HERNANDEZ-ZABA\PycharmProjects\tp-machine-learnig\data_airbus.csv', index = False)
 
 
 print("end of code")
