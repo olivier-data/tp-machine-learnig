@@ -69,7 +69,7 @@ DataDFA.plot(kind='bar', subplots=False)
 
 #mise en echelle de données AIRBUS
 train_values = DataDFA.values
-min_max_scallr = MinMaxScaler()
+min_max_scaler = MinMaxScaler()
 # définir le scaler à partir de l'ensemble des données
 scaler = min_max_scaler.fit(train_values.reshape(-1, 1))
 # mise à l'échelle des données d'apprentissage et de test
