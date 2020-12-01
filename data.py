@@ -67,4 +67,15 @@ DataDFA = dataDFA.drop(['Open', 'High', 'Low', 'Volume', 'Dividends', 'Stock Spl
 DataDFA.head()
 DataDFA.plot(kind='bar', subplots=False)
 
+#mise en echelle de données AIRBUS
+train_values = DataDFA.values
+min_max_scallr = MinMaxScaler()
+# définir le scaler à partir de l'ensemble des données
+scaler = min_max_scaler.fit(train_values.reshape(-1, 1))
+# mise à l'échelle des données d'apprentissage et de test
+train_values = scaler.transform(DataDFA.values[:2000].reshape(-1, 1))
+test_values = scaler.transform(DataDFA.values[2000:].reshape(-1, 1))
+
+
+
 print("end of code")
