@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 get_ipython().run_line_magic('matplotlib', 'inline')
-
+from sklearn.preprocessing import MinMaxScaler
 print("hello this for sharing group code")
 import yfinance as yf
 
