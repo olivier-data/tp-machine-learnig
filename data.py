@@ -42,6 +42,29 @@ dataDFC = datac.history(period='1d',start = '2000-12-01',end='2020-11-30')
 
 
 dataDFA.to_csv(r'C:\Users\Luisa.HERNANDEZ-ZABA\PycharmProjects\tp-machine-learnig\data_airbus.csv', index = False)
+dataDFC.to_csv(r'C:\Users\Luisa.HERNANDEZ-ZABA\PycharmProjects\tp-machine-learnig\data_carrefour.csv', index = False)
 
+#partie ajouter pour classer les valeurs nulles des colonnes de differents tables avec leurs pourcentage
+def missing_data(data):
+    total = data.isnull().sum().sort_values(ascending = False)
+    percent = (data.isnull().sum()/data.isnull().count()*100).sort_values(ascending = False)
+    return pd.concat([total, percent], axis=1, keys=['Total NaN Values', 'Percentage of NaN Values'])
+
+missing_data(dataDFA)
+missing_data(dataDFC)
+
+dataDFC.dtypes
+dataDFC.head()
+# suppression des colonnes qui n'ont pas d'interet
+DataDFC = dataDFC.drop(['Open', 'High', 'Low', 'Volume', 'Dividends', 'Stock Splits'], axis = 1)
+DataDFC.head()
+DataDFC.plot(kind='bar', subplots=False)
+
+dataDFA.dtypes
+dataDFA.head()
+# suppression des colonnes qui n'ont pas d'interet
+DataDFA = dataDFA.drop(['Open', 'High', 'Low', 'Volume', 'Dividends', 'Stock Splits'], axis = 1)
+DataDFA.head()
+DataDFA.plot(kind='bar', subplots=False)
 
 print("end of code")
