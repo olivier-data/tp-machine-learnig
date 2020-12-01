@@ -1,6 +1,6 @@
 
 
-#1 La récupération de données :  cotation Airbus depuis 2010
+#1 La récupération de données :  cotation Airbus et carrefour depuis 2010
 #2 Le traitement et l’analyse : 
 #2.1 Éliminer les NaN et les données non pertinentes
 #2.2 traiter
@@ -32,10 +32,12 @@ print("hello this for sharing group code")
 import yfinance as yf
 
 airbus ='AIR.PA'
+carrefour ='CA.PA'
+
 data = yf.Ticker(airbus)
+datac = yf.Ticker(carrefour)
 
 dataDF = data.history(period='1d',start = '2000-12-01',end='2020-11-30')
-
 
 dataDF.to_csv(r'C:\Users\Luisa.HERNANDEZ-ZABA\PycharmProjects\tp-machine-learnig\data_airbus.csv', index = False)
 
