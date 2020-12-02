@@ -76,6 +76,53 @@ scaler = min_max_scaler.fit(train_values.reshape(-1, 1))
 train_values = scaler.transform(DataDFA.values[:2000].reshape(-1, 1))
 test_values = scaler.transform(DataDFA.values[2000:].reshape(-1, 1))
 
+from sklearn.preprocessing import MinMaxScaler
+#mise en echelle de données AIRBUS
+data_airbus_serie = DataDFA.values
+min_max = MinMaxScaler()
+# définir le scaler à partir de l'ensemble des données # mise à l'échelle des données entre -1 et 1
+data_airbus_serie = min_max.fit_transform(data_airbus_serie.reshape(-1, 1))
+
+data_airbus_serie
+
+def create_window(dataset, start_index, end_index, history_size, prediction_size):
+    data = []
+    labels = []
+
+    start_index = start_index + history_size
+    if end_index is None:
+        end_index = len(dataset) - prediction_size
+
+    for i in range(start_index, end_index):
+        indices = range(i - history_size, i)
+        data.append(np.reshape(dataset[indices], (history_size, 1)))
+        
+        if dataset[i+prediction_size] == 0:
+            if dataset[i] == 0:
+                labels.append(0)
+            else:
+                labels.append(-1)
+        else:
+            delta = ((dataset[i+prediction_size] - dataset[i]) / dataset[i+prediction_size]) * 100
+            if delta > 2:
+                labels.append(1)
+            elif delta >= -2:
+                labels.append(0)
+            else:
+                labels.append(-1)
+       
+    return np.array(data), np.array(labels)
+
+#lancement de la fonction avec une fenetre se 20 jours et une prediction à 4 jours
+data_X, data_Y = create_window(data_airbus_serie, 0, None, 20,4)
+
+plt.hist(data_Y)
+plt.show()
+#on observe bien une matrice de points égale à -1, 0 et 1
+
+data_X.shape
+
+data_y.shape
 
 
 print("end of code")
